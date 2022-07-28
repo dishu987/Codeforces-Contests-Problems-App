@@ -1,0 +1,153 @@
+{%extends 'main/base.html'%}
+<!--[if IE 8]>This is Home<![endif]-->
+{% block title %}home{% endblock %}
+<!-- This is Home -->
+{%block crausel %} {% load static %}
+<!-- Swiper -->
+<div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper">
+    <div class="parallax-bg" data-swiper-parallax="-23%" id="bg-cr"></div>
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <div class="title" data-swiper-parallax="-300">Slide 1</div>
+            <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+            <div class="text" data-swiper-parallax="-100">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh
+                    euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.
+                </p>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="title" data-swiper-parallax="-300">Slide 2</div>
+            <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+            <div class="text" data-swiper-parallax="-100">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh
+                    euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.
+                </p>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="title" data-swiper-parallax="-300">Slide 3</div>
+            <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+            <div class="text" data-swiper-parallax="-100">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh
+                    euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</div>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        speed: 600,
+        parallax: true,
+        loop: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+    var x = document.getElementById("bg-cr");
+    x.style.backgroundImage = `url("{%static 'IMAGES/cr2.jpg'%}")`;
+</script>
+{%endblock%}
+<!-- lsg -->
+{% block content %}
+
+<div class="col-sm-12 flex flex-wrap ">
+    <div class="col-sm-6 p-6">
+        <div class="card bg-blue-100 shadow-lg h-100">
+            <div class="card-header font-bold bg-blue-600 text-white">
+                Practice Problems of Codeforces
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Search Practice Problems of Codeforces by tags</h5>
+                <form method="post">
+                    {%csrf_token%}
+                    <input type="text" name="problems" id="problems" value="problems" hidden>
+                    <div class="form-floating my-6">
+                        <select class="form-select" id="floatingSelect" name="tag" aria-label="Floating label select example">
+                            <option value="all" selected>All</option>
+                            <option value="trees">Trees</option>
+                            <option value="greedy">Greedy</option>
+                            <option value="Rainbinary search">Rainbinary search</option>
+                            <option value="brute force">brute force</option>
+                            <option value="data structures">data structures</option>
+                            <option value="geometry">geometry</option>
+                            <option value="math">Math</option>
+                            <option value="implementation">implementation</option>
+                            <option value="fft">fft</option>
+                            <option value="flows">flows</option>
+                            <option value="meet-in-the-middle">meet-in-the-middle</option>
+                            <option value="graphs">graphs</option>
+                            <option value="flows">flows</option>
+                            <option value="hashing">Hashing</option>
+                        </select>
+                        <label for="floatingSelect">Tags</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary bg-blue-600">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 p-6">
+        <div class="card bg-blue-100 shadow-lg h-100">
+            <div class="card-header font-bold bg-blue-600 text-white">
+                Practice Contests of Codeforces
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Search Practice Contests Codeforces:</h5>
+                <form method="post">
+                    {%csrf_token%}
+                    <input type="text" name="contests" id="problems" value="contests" hidden>
+                    <div class="form-check my-6">
+                        <input class="form-check-input" type="checkbox" name="gym" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Check for All gym Contests
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary bg-blue-600 my-6">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="col-sm-12 flex flex-wrap">
+    <div class="col-sm-6 p-6">
+        <div class="card">
+            <div class="card-header">
+                Featured
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary disabled">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 p-6">
+        <div class="card">
+            <div class="card-header">
+                Featured
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary disabled">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div> -->
+{%endblock%}

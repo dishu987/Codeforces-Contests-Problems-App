@@ -1,0 +1,108 @@
+{%extends 'main/base.html'%}
+<!--[if IE 8]>This is Home<![endif]-->
+{% block title %}Contests | {{id}}{% endblock %}
+<!-- Main Content -->
+{%block search%}
+<div class="p-6">
+    <div class="alert alert-info">Current Page : {{id}}/{{Pages}}</div>
+    <nav aria-label="Page navigation example" class="my-6">
+        <ul class="pagination">
+            <form method="post">
+                {%csrf_token%}
+                <input type="text" name="home" value="home" hidden>
+                <li class="page-item"><button class="page-link" type="submit">Home</button></li>
+            </form>
+            <form method="post">
+                {%csrf_token%}
+                <input type="text" name="prev" value="prev" hidden>
+                <li class="page-item {% if Prev %}disabled{%endif%}" {% if Prev%}style="cursor: not-allowed;" {%endif%}>
+                    <button class="page-link" type="submit">Previous</button>
+                </li>
+            </form>
+            <li class="page-item active">
+                <a class="page-link" href="#">
+                    {{id}}
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">{{ id|add:1}}</a>
+            </li>
+            <li class="page-item">
+                <span class="page-link">...</span>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">{{Pages}}</a>
+            </li>
+            <form method="post">
+                {%csrf_token%}
+                <input type="text" name="next" value="next" hidden>
+                <li class="page-item {% if Next%}disabled not-allowed{%endif%}" {% if Next%}style="cursor: not-allowed;" {%endif%}><button class="page-link" type="submit" {% if Next %}disabled{%endif%}>Next</button>
+                </li>
+            </form>
+        </ul>
+    </nav>
+    <div class="flex justify-content-center align-items-center flex-wrap col-sm-12">
+        {% if contests %}{% for c in contests %}
+        <div class="col-sm-6 h-100">
+            <div class="card bg-blue-100 h-100 m-3 shadow-lg">
+                <div class="card-header bg-blue-600 text-white font-bold">
+                    {{c.id}} : {{c.type}}
+                </div>
+                <div class="card-body">
+                    {% if c.phase == "BEFORE" %}<span class="badge rounded-pill bg-danger">
+                        Upcoming
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                    {%endif%}
+
+                    <h5 class="card-title">{{c.phase}}/{{c.durationSeconds}}seconds{% if c.kind%}/{{c.kind}}{%endif%}{% if c.season %}/{{c.season}}{%endif%}</h5>
+                    <p class="card-text">{{c.name}}</p>
+                    <div class="text-red-600 font-bold">Difficulty : {% if c.difficulty %}{{c.difficulty}}{%else%}NA{%endif%}
+                    </div>
+                    <button type="button" class="btn btn-primary bg-blue-600" data-bs-toggle="modal" data-bs-target="#exampleModal{{c.id}}">
+                        Details
+                    </button> {% if c.phase == "BEFORE" %}
+                    <div class="p-1 my-1 rounded-3 bg-red-600 text-white">Starting Time: {{c.startTimeSeconds}}
+                    </div>
+                    {%endif%}
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal{{c.id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{c.id}}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-blue-600 text-white">
+                        {% if c.phase == "BEFORE" %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            Upcoming
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                        {%endif%}
+                        <h5 class="modal-title font-bold" id="exampleModalLabel{{c.id}}">{{c.id}} : {{c.type}}</h5>
+                        <button type="button" class="btn-close font-bold text-white" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-close"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5 class="card-title font-bold">{{c.phase}}/{{c.durationSeconds}}seconds{% if c.kind%}/{{c.kind}}{%endif%}{% if c.season %}/{{c.season}}{%endif%}
+                        </h5>
+                        <div class="bg-blue-100 rounded-3 p-3">{{c.name}}</div> {{c.description}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary bg-red-600 hover:bg-red-800" data-bs-dismiss="modal">Close</button>
+                        <a class="btn btn-primary bg-blue-600" target="_blank" href="https://codeforces.com/contestRegistration/{{c.id}}/virtual/true">Participate</a>
+                    </div>
+
+                    {% if c.phase == "BEFORE" %}
+                    <div class="p-1 m-3 rounded-3 bg-red-600 text-white">Starting Time: {{c.startTimeSeconds}}</div>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        {%endfor%} {%else %}
+        <div class="h1 text-red-600 ">Data Not Found</div>
+        {%endif%}
+    </div>
+</div>
+{%endblock%}

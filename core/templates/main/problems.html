@@ -1,0 +1,171 @@
+{%extends 'main/base.html'%}
+<!--[if IE 8]>This is Home<![endif]-->
+{% block title %}Problems | {{tag}}{% endblock %}
+<!-- Main Content -->
+{%block search%}
+<div class="p-6">
+    <div class="alert alert-info">Current Page : {{id}}/{{Pages}}</div>
+    <div class="form-group py-1">
+        <label for="search" class="font-bold">Search</label>
+        <input type="text" name="search" id="myInput" class="form-control" placeholder="search by tags,name,id etc...">
+    </div>
+    <nav aria-label="Page navigation example" class="my-6">
+        <ul class="pagination">
+            <form method="post">
+                {%csrf_token%}
+                <input type="text" name="home" value="home" hidden>
+                <li class="page-item"><button class="page-link" type="submit">Home</button></li>
+            </form>
+            <form method="post">
+                {%csrf_token%}
+                <input type="text" name="prev" value="prev" hidden>
+                <li class="page-item {% if Prev %}disabled{%endif%}" {% if Prev%}style="cursor: not-allowed;" {%endif%}>
+                    <button class="page-link" type="submit">Previous</button>
+                </li>
+            </form>
+            <li class="page-item active">
+                <a class="page-link" href="#">
+                    {{id}}
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">{{ id|add:1}}</a>
+            </li>
+            <li class="page-item">
+                <span class="page-link">...</span>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">{{Pages}}</a>
+            </li>
+            <form method="post">
+                {%csrf_token%}
+                <input type="text" name="next" value="next" hidden>
+                <li class="page-item {% if Next%}disabled not-allowed{%endif%}" {% if Next%}style="cursor: not-allowed;" {%endif%}><button class="page-link" type="submit" {% if Next %}disabled{%endif%}>Next</button>
+                </li>
+            </form>
+        </ul>
+    </nav>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Sr. no.</th>
+                    <th scope="col">Contest Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Tags</th>
+                    <th scope="col">Points</th>
+                    <th scope="col">More</th>
+                    <th scope="col">Link</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                {% if problems %} {% for d in problems %}
+                <tr id="tr{{forloop.counter}}">
+                    <th scope="row" id="no{{forloop.counter}}"></th>
+                    <script>
+                        var x = document.getElementById("no{{forloop.counter}}");
+                        var y = parseInt("{{forloop.counter}}") + (parseInt("{{id}}") - 1) * 10;
+                        x.innerHTML = y;
+                    </script>
+                    <td>{{d.contestId}}{{d.index}}</td>
+                    <td>{{d.name}}</td>
+                    <td style="max-width: 150px;cursor: pointer;">{% for t in d.tags %}
+                        <span class="badge badge-success bg-green-400 hover:bg-red-600 m-1 rounded-pill">{{t}}</span> {%endfor%}
+                    </td>
+                    <td>{% if d.points%}{{d.points}}{%else %}Unrated{%endif%}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary bg-blue-800" id="myInput{{forloop.counter}}" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{forloop.counter}}">
+                            More
+                        </button>
+                        <script>
+                            var myModal = document.getElementById('staticBackdrop{{forloop.counter}}')
+                            var myInput = document.getElementById('myInput{{forloop.counter}}')
+                            myModal.addEventListener('shown.bs.modal', function() {
+                                myInput.focus()
+                            })
+                        </script>
+                        <div class="modal fade" id="staticBackdrop{{forloop.counter}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-dark font-bold" id="staticBackdropLabel">Problem Information
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% for t in d.tags %}
+                                        <span class="badge badge-success bg-green-400 hover:bg-red-600 m-1 rounded-pill" id="tag{{t}}">{{t}}</span> {%endfor%}
+                                    </div>
+                                    <div class="p-3 flex flex-nowrap" id="copy">
+                                        <input type="text" value="https://codeforces.com/problemset/problem/{{d.contestId}}/{{d.index}}" name="link" class="form-control" id="{{d.contestId}}_{{d.index}}" disabled>
+                                        <button onclick="myFunction()" class=" btn btn-primary bg-blue-600 ">
+                                            <i class="fa fa-copy "></i>
+                                        </button>
+                                    </div>
+                                    <script>
+                                        // function myfun() {
+                                        //     let text_copy = document.getElementById("link_copy{{forloop.counter}}");
+                                        //     text_copy.select();
+                                        //     text_copy.setSelectionRange(0, 99999);
+                                        //     navigator.clipboard.writeText(text_copy.value);
+                                        //     alert("Copied Link! " + text_copy.value);
+                                        // }
+                                        function myFunction() {
+                                            var copyText = document.getElementById("{{d.contestId}}_{{d.index}}");
+                                            copyText.select();
+                                            copyText.setSelectionRange(0, 99999);
+                                            navigator.clipboard.writeText(copyText.value);
+                                            alert("Copied the text: " + copyText.value);
+                                        }
+                                    </script>
+                                    <div class="bg-purple-200 font-bold m-6">{% if d.points%}{{d.points}}{%else %}Unrated{%endif%}/{{d.index}} /{{d.type}}</div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger bg-red-800" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="https://codeforces.com/problemset/problem/{{d.contestId}}/{{d.index}} " class="btn-link " target="_blank ">
+                            <i class='fas fa-share-square' style='font-size:20px'></i>
+                        </a>
+                    </td>
+                </tr>
+                <script>
+                    var m = document.getElementById("tr{{forloop.counter}} ");
+                    var n = "{{d.index}} ";
+                    if (n == "A ") {
+                        m.classList.add("bg-green-100 ")
+                    } else if (n == "B ") {
+                        m.classList.add("bg-yellow-100 ")
+                    } else if (n == "C ") {
+                        m.classList.add("bg-orange-100 ")
+                    } else if (n == "D ") {
+                        m.classList.add("bg-red-100 ")
+                    } else if (n == "E ") {
+                        m.classList.add("bg-blue-100 ")
+                    } else {
+                        m.classList.add("bg-pink-100 ")
+                    }
+                </script>
+                {%endfor%} {%else %}
+                <tr>
+                    <td class="h1 text-red-600 ">Data Not Found</td>
+                </tr>
+                {%endif%}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $("#myInput ").on("keyup ", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr ").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{%endblock%}
