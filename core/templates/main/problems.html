@@ -64,7 +64,7 @@
                     <label class="form-check-label text-red-600 font-bold" for="flexCheckDefault">
                         Decending
                     </label>
-                    <input class="form-check-input mx-0 bg-danger" type="checkbox" name="decending" id="flexCheckDefault" {% if reverse %}checked{%endif%}>
+                    <input class="form-check-input mx-0 bg-danger" type="checkbox" name="decending" id="flexCheckDefault1">
                 </div>
                 <div class="text-red-600 font-bold bg-red-100 mx-1 my-6 p-1 border-solid border-1 border-red-600 rounded-3">
                     Sort By:
@@ -83,6 +83,12 @@
                 let radio1 = document.getElementById("btnradio1");
                 let radio2 = document.getElementById("btnradio2");
                 let radio3 = document.getElementById("btnradio3");
+                let check1 = document.getElementById("flexCheckDefault1");
+                if ("{{reverse}}" == "0") {
+                    check1.checked = false;
+                } else {
+                    check1.checked = true;
+                }
                 if ("{{sortby}}" == "index") {
                     radio1.checked = true;
                 } else if ("{{sortby}}" == "name") {
