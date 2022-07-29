@@ -9,7 +9,7 @@ Application that provide all contests and Practice Problems on Codeforces
 3. Can see all details on a problem.
 4. Search all contest i.e. FINISHED, BEFORE etc.
 5. Can See all details on contest and participate on codeforces.
-
+6. Deploy Link: `https://codeforces-cp-dishant.herokuapp.com/`
 # Technologies Used
 
 1. Django (Backend)
