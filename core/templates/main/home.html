@@ -97,7 +97,7 @@
                         </select>
                         <label for="floatingSelect">Tags</label>
                     </div>
-                    <button type="submit" class="btn btn-primary bg-blue-600">Submit</button>
+                    <button type="submit" class="btn btn-primary bg-blue-600" data-bs-toggle="popover" data-bs-trigger="focus" title="Dismissible popover" data-bs-content="And here's some amazing content. It's very engaging. Right?">Submit</button>
                 </form>
             </div>
         </div>
@@ -150,4 +150,26 @@
         </div>
     </div>
 </div> -->
+<div class="position-fixed end-0 bottom-0 p-3" style="z-index: 11">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <div class="rounded-3 px-3 bg-red-600 me-2"><i class="fa fa-info text-white"></i></div>
+            <strong class="me-auto text-red-600">Instructions</strong>
+            <small>1 second ago</small>
+            <button type="button" class="btn-close bg-dark flex justify-content-center align-items-center text-white" data-bs-dismiss="toast" aria-label="Close">
+                <i class="fa fa-close"></i>
+            </button>
+        </div>
+        <div class="toast-body">
+            Please do not change <strong class="text-red-600">URL</strong> patterns.
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = (event) => {
+        var x = document.querySelector('.toast');
+        let y = new bootstrap.Toast(x);
+        y.show();
+    }
+</script>
 {%endblock%}

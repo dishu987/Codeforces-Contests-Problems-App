@@ -6,7 +6,7 @@ def home(request):
     if request.method == "POST":
         if request.POST.get("problems") == 'problems':
             tag = request.POST['tag']
-            return redirect("problems",tag,1)
+            return redirect("problems",tag,1,"index","0")
         elif request.POST.get("contests") == 'contests':
             gym = request.POST.getlist("gym")
             # print(gym)
@@ -18,7 +18,7 @@ def home(request):
             return redirect("contests",1,url_str)
     return render(request,"main/home.html")
 
-def problems(request,id,tag):
+def problems(request,id,tag,sortby,reverse):
     Prev=False
     Next=False
     if tag=="all":
@@ -42,20 +42,75 @@ def problems(request,id,tag):
         if count<id*10 and count>=10*(id-1):
             data1.append(d)
         count=count+1
+    if sortby=="index":
+        if reverse=="1":
+            data1.sort(key=lambda row:(row["index"]),reverse=True)
+        else:
+            data1.sort(key=lambda row:(row["index"]),reverse=False)
+    elif sortby=="name":
+        if reverse=='1':
+            data1.sort(key=lambda row:(row["name"]),reverse=True)
+        else:
+            data1.sort(key=lambda row:(row["name"]),reverse=False)
+    elif sortby=="tags":    
+        if reverse=='1':
+            data1.sort(key=lambda row:(len(row["tags"])),reverse=True)
+        else:
+            data1.sort(key=lambda row:(len(row["tags"])),reverse=False)
     if request.method == "POST":
         if request.POST.get("next") == 'next':
             id=id+1
-            return redirect("problems",tag,id)
+            return redirect("problems",tag,id,sortby,reverse)
         elif request.POST.get("prev") == 'prev':
             if id>1:
                 id=id-1
             else:
                 pass
-            return redirect("problems",tag,id)
+            return redirect("problems",tag,1,sortby,reverse)
         elif request.POST.get("home") == 'home':
             return redirect("home")
+        elif request.POST.get("sorting") == 'sorting':
+            decending = request.POST.getlist("decending")
+            sort_by = request.POST.getlist("btnradio")
+            # print(sort_by)
+            # print(decending)
+            if sort_by==["index"]:
+                sortby="index"
+                if decending==['on']:
+                    reverse="1"
+                    data1.sort(key=lambda row:(row["index"]),reverse=True)
+                else:
+                    reverse="0"
+                    data1.sort(key=lambda row:(row["index"]),reverse=False)
+            elif sort_by==["name"]:
+                sortby="name"
+                if decending==['on']:
+                    reverse="1"
+                    data1.sort(key=lambda row:(row["name"]),reverse=True)
+                else:
+                    reverse="0"
+                    data1.sort(key=lambda row:(row["name"]),reverse=False)
+            elif sort_by==["tags"]:  
+                sortby="tags"  
+                if decending==['on']:
+                    reverse="1"
+                    data1.sort(key=lambda row:(len(row["tags"])),reverse=True)
+                else:
+                    reverse="0"
+                    data1.sort(key=lambda row:(len(row["tags"])),reverse=False)
+            return redirect("problems",tag,id,sortby,reverse)
     Pages=int(len(tmp)/10)+1
-    return render(request,"main/problems.html",{"problems":data1,"id":id,"Prev":Prev,"Next":Next,"tag":tag,"Pages":Pages})
+    Context = {
+        "problems":data1,
+        "id":id,
+        "Prev":Prev,
+        "Next":Next,
+        "tag":tag,
+        "Pages":Pages,
+        "reverse":reverse,
+        "sortby":sortby,
+    }
+    return render(request,"main/problems.html",Context)
 
 
 # Contests Page:

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>App | {% block title %}Home{% endblock %}</title>
-    <link rel="icon" href="{% static 'CSS/title-logo.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'IMAGES/favicon.png' %}" type="image/x-icon">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--[if IE 8]>This is Static<![endif]-->
@@ -53,28 +53,6 @@
         <!-- new line -->
         {%block content%} {%endblock%}
     </div>
-    <div class="position-fixed start-0 bottom-0 p-3" style="z-index: 11">
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <div class="rounded-3 px-3 bg-red-600 me-2"><i class="fa fa-info text-white"></i></div>
-                <strong class="me-auto text-red-600">Instructions</strong>
-                <small>1 second ago</small>
-                <button type="button" class="btn-close bg-dark flex justify-content-center align-items-center text-white" data-bs-dismiss="toast" aria-label="Close">
-                    <i class="fa fa-close"></i>
-                </button>
-            </div>
-            <div class="toast-body">
-                Please do not change <strong class="text-red-600">URL</strong> patterns.
-            </div>
-        </div>
-    </div>
-    <script>
-        window.onload = (event) => {
-            var x = document.querySelector('.toast');
-            let y = new bootstrap.Toast(x);
-            y.show();
-        }
-    </script>
     <script src=" " async defer></script>
 </body>
 
