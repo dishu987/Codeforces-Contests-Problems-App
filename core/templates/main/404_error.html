@@ -1,0 +1,22 @@
+{%extends 'main/base.html'%}
+<!--[if IE 8]>This is Home<![endif]-->
+{% block title %} OOPS! Error 404{%endblock%}
+<!-- Error 404 -->
+{% load static%} {%block content %}
+
+<div class="col-sm-12 flex flex-wrap">
+    <div class="col-sm-6 p-6 flex justify-content-end align-items-center">
+        <img src="{% static 'IMAGES/404_face.png' %}" height="400" width="400" alt="" srcset="">
+    </div>
+    <div class="col-sm-6 p-6 flex justify-content-start align-items-start flex-wrap">
+        <div class="fa m-6" style="font-size: 100px;">&#xf119;</div>
+        <div class="h3 text-blue-600 font-bold mx-6">
+            Oooooops! Looks like nothing was found at this location. Go to home to click below button <i class="fa fa-arrow-down"></i>
+        </div>
+        <div class="m-6">
+            <a href="{% url 'home' %}" class="btn btn-success bg-green-600">
+                </i> <i class="fa fa-home"></i> Back to home</a>
+        </div>
+    </div>
+</div>
+{%endblock%}

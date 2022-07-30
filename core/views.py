@@ -17,7 +17,7 @@ def home(request):
                 url_str="gym=false"
             return redirect("contests",1,url_str)
     return render(request,"main/home.html")
-
+ 
 def problems(request,id,tag,sortby,reverse):
     Prev=False
     Next=False
@@ -149,3 +149,10 @@ def contests(request,id,url_str):
         elif request.POST.get("home") == 'home':
             return redirect("home")
     return render(request,"main/contests.html",{"contests":data1,"id":id,"Prev":Prev,"Next":Next,"url_str":url_str,"Pages":Pages})
+
+#Error404 Page
+def error_404_view(request,exception):
+    return render(request,"main/404_error.html")
+ 
+def error_500_view(request):
+    return render(request,"main/404_error.html") 
