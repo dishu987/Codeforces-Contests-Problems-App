@@ -4,52 +4,41 @@
 <!-- This is Home -->
 {%block crausel %} {% load static %}
 <!-- Swiper -->
-<div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper">
-    <div class="parallax-bg" data-swiper-parallax="-23%" id="bg-cr"></div>
+<div class="swiper mySwiper">
     <div class="swiper-wrapper">
         <div class="swiper-slide">
-            <div class="title" data-swiper-parallax="-300">Slide 1</div>
-            <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-            <div class="text" data-swiper-parallax="-100">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh
-                    euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.
-                </p>
-            </div>
+            <img src="{% static 'IMAGES/cr1.jpg'%}" alt="" srcset="">
         </div>
         <div class="swiper-slide">
-            <div class="title" data-swiper-parallax="-300">Slide 2</div>
-            <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-            <div class="text" data-swiper-parallax="-100">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh
-                    euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.
-                </p>
-            </div>
+            <img src="{% static 'IMAGES/cr2.jpg'%}" alt="" srcset="">
         </div>
         <div class="swiper-slide">
-            <div class="title" data-swiper-parallax="-300">Slide 3</div>
-            <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-            <div class="text" data-swiper-parallax="-100">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh
-                    euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.
-                </p>
-            </div>
+            <img src="{% static 'IMAGES/cr3.jpg'%}" alt="" srcset="">
+        </div>
+        <div class="swiper-slide">
+            <img src="{% static 'IMAGES/cr4.jpg'%}" alt="" srcset="">
+        </div>
+        <div class="swiper-slide">
+            <img src="{% static 'IMAGES/cr5.jpg'%}" alt="" srcset="">
         </div>
     </div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
     <div class="swiper-pagination"></div>
 </div>
+
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
 <!-- Initialize Swiper -->
 <script>
     var swiper = new Swiper(".mySwiper", {
-        speed: 600,
-        parallax: true,
-        loop: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
         pagination: {
             el: ".swiper-pagination",
             clickable: true,
@@ -59,8 +48,6 @@
             prevEl: ".swiper-button-prev",
         },
     });
-    var x = document.getElementById("bg-cr");
-    x.style.backgroundImage = `url("{%static 'IMAGES/cr2.jpg'%}")`;
 </script>
 {%endblock%}
 <!-- lsg -->

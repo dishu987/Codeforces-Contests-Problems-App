@@ -13,44 +13,100 @@
         <span class="badge bg-blue-100 text-blue-600 mx-1">E</span>
         <span class="badge bg-pink-100 text-pink-600 mx-1">Others</span>
     </div>
+    <nav aria-label="Page navigation example" class="my-6">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" type="link" href="{% url 'home' %}">
+                    <i class="fa fa-arrow-left"></i> Home
+                </a>
+            </li>
+        </ul>
+    </nav>
     <div class="form-group py-1">
         <label for="search" class="font-bold">Search</label>
         <input type="text" name="search" id="myInput" class="form-control" placeholder="search by tags,name,id etc...">
     </div>
     <div class="col-sm-12 flex flex-wrap justify-content-center align-items-center">
         <div class="col-sm-4">
-            <nav aria-label="Page navigation example" class="my-6">
+            <nav aria-label="Page navigation example flex flex-wrap" class="my-6">
                 <ul class="pagination">
-                    <form method="post">
-                        {%csrf_token%}
-                        <input type="text" name="home" value="home" hidden>
-                        <li class="page-item"><button class="page-link" type="submit">Home</button></li>
-                    </form>
                     <form method="post">
                         {%csrf_token%}
                         <input type="text" name="prev" value="prev" hidden>
                         <li class="page-item {% if Prev %}disabled{%endif%}" {% if Prev%}style="cursor: not-allowed;" {%endif%}>
-                            <button class="page-link" type="submit">Previous</button>
+                            <button class="page-link" type="submit">
+                                <i class="fa fa-arrow-left"></i>
+                            </button>
                         </li>
                     </form>
+                    {% if 4 > id and Pages > id %}
                     <li class="page-item active">
-                        <a class="page-link" href="#">
+                        <a class="page-link" href="{% url 'problems' tag id sortby reverse %}">
                             {{id}}
                         </a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="#">{{ id|add:1}}</a>
+                        <a class="page-link" href="{% url 'problems' tag id|add:1 sortby reverse %}">{{ id|add:1}}</a>
                     </li>
                     <li class="page-item">
                         <span class="page-link">...</span>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="#">{{Pages}}</a>
+                        <a class="page-link" href="{% url 'problems' tag Pages sortby reverse %}">{{Pages}}</a>
                     </li>
+                    {% elif Pages > id and id > 3 %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'problems' tag 1 sortby reverse %}">
+                            1
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-link">...</span>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'problems' tag id|add:-1 sortby reverse %}">{{ id|add:-1}}</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="{% url 'problems' tag id sortby reverse %}">{{id}}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'problems' tag id|add:1 sortby reverse %}">{{id|add:1}}</a>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-link">...</span>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'problems' tag Pages sortby reverse %}">
+                            {{Pages}}
+                        </a>
+                    </li>
+                    {%else%}
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'problems' tag 1 sortby reverse %}">
+                            1
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-link">...</span>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'problems' tag id|add:-2 sortby reverse %}">{{id|add:-2}}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'problems' tag id|add:-1 sortby reverse %}">{{id|add:-1}}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link active" href="{% url 'problems' tag Pages sortby reverse %}">
+                            {{id}}
+                        </a>
+                    </li>
+                    {%endif%}
                     <form method="post">
                         {%csrf_token%}
                         <input type="text" name="next" value="next" hidden>
-                        <li class="page-item {% if Next%}disabled not-allowed{%endif%}" {% if Next%}style="cursor: not-allowed;" {%endif%}><button class="page-link" type="submit" {% if Next %}disabled{%endif%}>Next</button>
+                        <li class="page-item {% if Next%}disabled not-allowed{%endif%}" {% if Next%}style="cursor: not-allowed;" {%endif%}><button class="page-link" type="submit" {% if Next %}disabled{%endif%}>
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
                         </li>
                     </form>
                 </ul>

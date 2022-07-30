@@ -28,7 +28,7 @@
 <body>
     <noscript>Make sure javascript in enable in yours browser for shameless experience</noscript>
     <div class="root">
-        <nav class="navbar navbar-expand-lg navbar-light flex flex-wrap bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light flex flex-wrap bg-blue-600">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
                     <span>
@@ -39,12 +39,9 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse flex justify-content-end align-items-center flex-wrap" id="navbarSupportedContent">
-                    <form class=" d-flex bg-blue-600 hover:bg-blue-800 rounded-r-xl rounded-l-xl">
-                        <input class=" form-control me-2 bg-blue-100 outline-0 bg-blue-100 px-3 m-0 w-100 rounded-l-xl rounded-r-none" type="search " placeholder="Search " aria-label="Search ">
-                        <a class="btn bg-transparent text-white px-3 m-0 " style="margin: 0; " type="submit ">Search</a>
-                    </form>
-                </div>
+                <script async src="https://cse.google.com/cse.js?cx=343941e49c5c646bd">
+                </script>
+                <div class="gcse-search"></div>
             </div>
         </nav>
         {%block crausel%} {%endblock%}
@@ -53,7 +50,118 @@
         <!-- new line -->
         {%block content%} {%endblock%}
     </div>
-    <script src=" " async defer></script>
+    <!-- Footer -->
+    <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-between p-4 bg-blue-600">
+            <!-- Left -->
+            <div class="me-5">
+                <span>Get connected with us on social networks:</span>
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a href="#" class="text-white me-4" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/dishuatkan" class="text-white me-4" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="dishu01082003@gmail.com" target="_blank" class="text-white me-4">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="#" class="text-white me-4">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/dishant-531236213/" target="_blank" class="text-white me-4">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/dishu987" class="text-white me-4" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold">Build By: Dishant</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #ffe100; height: 2px" />
+                        <p>
+                            Here you can find all problems of codeforces by tags like greedy,trees,graphs etc. and can also search for contests.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold">Contests</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #ffe100; height: 2px" />
+                        <p>
+                            <a href="{% url 'contests' 1 'gym=false' %}" class="text-white">All</a>
+                        </p>
+                        <p>
+                            <a href="{% url 'contests' 1 'gym=true' %}" class="text-white">Gym</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold">Useful links</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #ffe100; height: 2px" />
+                        <p>
+                            <a href="{% url 'problems' 'trees' 1 'index' '1' %}" class="text-white">Tree</a>
+                        </p>
+                        <p>
+                            <a href="{% url 'problems' 'greedy' 1 'index' '1' %}" class="text-white">Greedy</a>
+                        </p>
+                        <p>
+                            <a href="{% url 'problems' 'graphs' 1 'index' '1' %}" class="text-white">Graphs</a>
+                        </p>
+                        <p>
+                            <a href="{% url 'problems' 'dp' 1 'index' '1' %}" class="text-white">DP</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold">Contact</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #ffe100; height: 2px" />
+                        <p><i class="fas fa-home mr-3"></i> Kharkhoda, Sonipat(Haryana) 131402, INDIA</p>
+                        <p><i class="fas fa-envelope mr-3"></i>dishu01082003@gmail.com</p>
+                        <p><i class="fas fa-phone mr-3"></i> +91-9992115079</p>
+                        <a href="https://dishant-kumar-portfolio.herokuapp.com" target="_blank"><i
+                                class="fas fa-user-alt mr-3"></i>Portfolio</a>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            © 2022 Copyright:
+            <a class="text-white" href="https://codeforces-cp-dishant.herokuapp.com/">codeforces-cp-dishant.herokuapp.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <script async src="https://cse.google.com/cse.js?cx=343941e49c5c646bd">
+    </script>
 </body>
 
 </html>
